@@ -17,4 +17,19 @@ SOAR EDR Incident Response Project demonstrates how to integrate LimaCharlie (ED
 - LimaCharlie (EDR)
 - Tines (SOAR)
 - Slack & Email integrations
-![Lab Setup](screenshots/Screenshot_2025-09-10_053151.png)
+  
+![Lab Setup](screenshots/soar_edr_ir_arch.png)
+
+## 🖥️ Lab Architecture & Workflow
+
+Shows how suspicious activity on the endpoint is detected, forwarded, and responded to:
+
+1. Endpoint (Windows Server VM) → The simulated attacker runs LaZagne, a password recovery tool.
+2. LimaCharlie (EDR) → Detects the suspicious process execution based on detection rules
+3. Tines (SOAR) → Receives the alert from LimaCharlie through a webhook integration.
+4. Slack & Email → Tines automatically notifies the SOC team in real time.
+5. Analyst Decision → Tines prompts the analyst to decide whether the endpoint should be isolated.
+6. Host Isolation → If approved, Tines calls the LimaCharlie API to quarantine the endpoint. A confirmation is sent back to Slack.
+
+   ![Workflow](screenshots/soar_edr_ir_workflow.png)
+   
