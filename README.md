@@ -37,10 +37,17 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 
 - Deployed Windows Server VM and installed LimaCharlie agent.
 
+Download the appropriate Windows LimaCharlie sensor from the LC console.
 ![Sensor Download](screenshots/LC_sensor_download.png)
-Copy the sensor download link that matches the machine type to 
+
+Generated an installation key in LimaCharlie.
 ![Intallation Keys](screenshots/LC_Installation_keys.png)
-![Intallation Keys](screenshots/vm_sensor_download_sensor_keys.png)  
+
+Installed the agent on the Windows VM using PowerShell.
+![Intallation Keys](screenshots/vm_sensor_download_sensor_keys.png) 
+
+Verified the sensor check-in under LimaCharlie → Sensors.
+![Intallation Keys](screenshots/vm_sensor_download_sensor_keys.png) 
 - Configured Slack + Email integrations in Tines.
 - Built LimaCharlie → Tines webhook connection.
 
