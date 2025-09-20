@@ -17,3 +17,4 @@ SOAR EDR Incident Response Project demonstrates how to integrate LimaCharlie (ED
 - LimaCharlie (EDR)
 - Tines (SOAR)
 - Slack & Email integrations
+![Lab Setup](screenshots/Screenshot_2025-09-10_053151.png)
