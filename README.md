@@ -69,30 +69,7 @@ It generates an alert if any of the following conditions are met:
 
 ```yaml
 
-events:
-  - NEW_PROCESS
-  - EXISTING_PROCESS
-  op: and
-  rules:
-  - op: is windows
-    path: or
-    rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: lazagne.exe
-       - case sensitive: false
-        op: ends with
-        path: event/COMMAND_LINE
-        value: all
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: lazagne
-      - case sensitive: false
-      - op: is
-        path: event/HASH
-        value: dc06d62ee95062e714f2566c95b8edaabfd387023b1bf98a09078b84007d5268
+Dection Rule
 ```
 
 
@@ -113,5 +90,74 @@ The detection is configured to generate a report with context, tagged under MITR
     tags:
       - attack.credential_access
   name: MyDFIR - HackTool - Lazagne (SOAR-EDR)
+```
+📸 [Insert screenshot of detection rule in LimaCharlie console]
+
+## ⚡ Tines SOAR Story
+
+Insert flow diagram.
+Explain major steps:
+
+1. Webhook receives detection.
+2. Slack + Email notifications.
+3. Analyst prompt for isolation decision.
+4. API call to LimaCharlie if approved.
+📸 [Insert screenshot of Tines flow]
+
+⚡ Tines SOAR Story
+
+## 📸 Demonstration Timeline (Incident Response in Action)
+
+Step-by-step sequence:
+
+1. Suspicious Tool Execution (Trigger Event)
+- LaZagne executed on endpoint.
+  📸 [Insert screenshot of LaZagne execution]
+2. Detection Raised (LimaCharlie → Tines)
+- Alert generated and forwarded.
+📸 [Insert screenshot of Slack alert]
+📸 [Insert screenshot of Email alert]
+3. Analyst Prompted
+- Analyst receives isolation decision form.
+📸 [Insert screenshot of Tines user prompt]
+4. Isolation Executed
+- Endpoint quarantined, confirmation posted.
+📸 [Insert screenshot of Slack isolation message]
+📸 [Insert screenshot of LC console showing Isolated]
+
+## 🔮 Next Steps
+
+Add detection coverage for other credential theft tools.
+
+Expand SOAR workflows to include ServiceNow/Jira ticketing.
+
+Enrich alerts with MITRE ATT&CK mappings and threat intel.
+
+## 📝 Report
+
+Short narrative summary — written like a mini SOC incident report.
+Example: This lab demonstrated that integrating LimaCharlie with Tines provides effective automated response to credential-dumping activity. Detections flowed seamlessly into SOAR, notifications reached analysts, and automated containment reduced MTTR.
+
+## 📚 References
+
+LimaCharlie Documentation
+
+Tines Documentation
+
+@MyDFIR YouTube Walkthrough
+
+## 🏁 Conclusion
+Summarize the project’s significance.
 
 
+## 🧩 Skills Demonstrated
+
+Threat detection & alerting (EDR).
+
+Workflow automation (SOAR).
+
+Incident triage & containment.
+
+API-driven integration.
+
+SOC analyst decision-making.
