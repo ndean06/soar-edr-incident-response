@@ -31,5 +31,5 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 5. Analyst Decision → Tines prompts the analyst to decide whether the endpoint should be isolated.
 6. Host Isolation → If approved, Tines calls the LimaCharlie API to quarantine the endpoint. A confirmation is sent back to Slack.
 
-   ![Workflow](screenshots/soar_edr_ir_workflow.png)
+![Workflow](screenshots/soar_edr_ir_workflow.png)
    
