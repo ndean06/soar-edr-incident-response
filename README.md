@@ -47,9 +47,71 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 ![Sensor Download & Keys](screenshots/vm_sensor_download_sensor_keys.png) 
 
 - Verified the sensor check-in under LimaCharlie → Sensors.
-
-![Connection](screenshots/sensor_connect.png) 
+  
+  ![Sensor Connection](screenshots/sensor_connect.png) 
 
 - Configured Slack + Email integrations in Tines.
 - Built LimaCharlie → Tines webhook connection.
+
+## 🔍 Detection Rules (LimaCharlie)
+To detect suspicious credential dumping activity, I created a custom detection rule in LimaCharlie targeting the execution of LaZagne.
+
+### Detection Logic
+
+This rule applies to Windows endpoints and triggers on both `NEW_PROCESS` and `EXISTING_PROCESS` events.
+It generates an alert if any of the following conditions are met:
+- Process file path ends with `lazagne.exe`
+- Command line ends with `all` (a common LaZagne execution flag)
+- Command line contains the keyword lazagne
+- File hash matches a known LaZagne binary
+
+### Detection Rule (YAML)
+
+```yaml
+
+events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+    path: or
+    rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: lazagne.exe
+       - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: all
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lazagne
+      - case sensitive: false
+      - op: is
+        path: event/HASH
+        value: dc06d62ee95062e714f2566c95b8edaabfd387023b1bf98a09078b84007d5268
+```
+
+
+
+### Detection Response
+
+The detection is configured to generate a report with context, tagged under MITRE ATT&CK – Credential Access.
+
+```yaml
+
+- action: report
+  metadata:
+    author: ndean
+    description: Detects LaZagne (SOAR-EDR Tool)
+    falsepositives:
+      - a lot
+    level: medium
+    tags:
+      - attack.credential_access
+  name: MyDFIR - HackTool - Lazagne (SOAR-EDR)
+
 
