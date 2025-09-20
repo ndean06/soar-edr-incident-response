@@ -33,3 +33,12 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 
 ![Workflow](screenshots/soar_edr_ir_workflow.png)
    
+## ⚙️ Setup & Configuration
+
+- Deployed Windows Server VM and installed LimaCharlie agent.
+
+![Intallation Keys](screenshots/soar_edr_ir_workflow.png)
+  
+- Configured Slack + Email integrations in Tines.
+- Built LimaCharlie → Tines webhook connection.
+
