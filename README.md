@@ -36,7 +36,7 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 ## ⚙️ Setup & Configuration
 
 - Deployed Windows Server VM and installed LimaCharlie agent.
-
+![Sensor Download](screenshots/LC_Installation_keys.png)
 ![Intallation Keys](screenshots/LC_Installation_keys.png)
   
 - Configured Slack + Email integrations in Tines.
