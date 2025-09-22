@@ -69,10 +69,34 @@ It generates an alert if any of the following conditions are met:
 
 ```yaml
 
-Dection Rule
+  events:
+    - NEW_PROCESS
+    - EXISTING_PROCESS
+  op: and
+  rules:
+    - op: is
+    - op: or
+      rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: lazagne.exe
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: all
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: lazagne
+        - case sensitive: false
+          op: is
+          path: event/HASH
+          value: dc06d62ee95062e714f2566c95b8edaabfd387023b1bf98a09078b84007d5268
+
 ```
 
-![Detection Rule](screenshots/vm_sensor_download_sensor_keys.png)
+![Detection Rule](screenshots/detect_rule.png)
 
 
 ### Detection Response
