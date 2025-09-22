@@ -93,7 +93,6 @@ It generates an alert if any of the following conditions are met:
           op: is
           path: event/HASH
           value: dc06d62ee95062e714f2566c95b8edaabfd387023b1bf98a09078b84007d5268
-
 ```
 
 ![Detection Rule](screenshots/detect_rule.png)
@@ -107,17 +106,17 @@ The detection is configured to generate a report with context, tagged under MITR
 
 - action: report
   metadata:
-    author: ndean
+    author: MyDFIR
     description: Detects LaZagne (SOAR-EDR Tool)
     falsepositives:
-      - a lot
+      - A lot
     level: medium
     tags:
       - attack.credential_access
   name: MyDFIR - HackTool - Lazagne (SOAR-EDR)
 ```
 
-![Dtection Resonse](screenshots/vm_sensor_download_sensor_keys.png)
+![Dtection Resonse](screenshots/response_rule.png)
 
 ## ⚡ Tines SOAR Story
 
