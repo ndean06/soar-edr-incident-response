@@ -152,32 +152,43 @@ This SOAR story in Tines orchestrates the automated incident response workflow. 
 
 Step-by-step sequence:
 
-1. Suspicious Tool Execution (Trigger Event)
+### 1. Suspicious Tool Execution (Trigger Event)
 - LaZagne executed on endpoint.
-  📸 [Insert screenshot of LaZagne execution]
-2. Detection Raised (LimaCharlie → Tines)
+
+![LaZagne execution](screenshots/1_lazagne.png)
+
+### 2. Detection Raised (LimaCharlie → Tines)
 - Alert generated and forwarded.
-📸 [Insert screenshot of Slack alert]
-📸 [Insert screenshot of Email alert]
-3. Analyst Prompted
+  
+![Slack alert](screenshots/2_slack_alert.png)
+
+![Email alert](screenshots/3_email_alert.png)
+
+### 3. Analyst is provided a detection link to further investigate
+![Detection Link](screenshots/4_detection_link.png)
+ 
+### 4. Analyst Prompted
 - Analyst receives isolation decision form.
-📸 [Insert screenshot of Tines user prompt]
-4. Isolation Executed
+
+![Tines user prompt](screenshots/5_tines_user_prompt_yes.png)
+
+### 5. Isolation Executed
 - Endpoint quarantined, confirmation posted.
-📸 [Insert screenshot of Slack isolation message]
-📸 [Insert screenshot of LC console showing Isolated]
 
-## 🔮 Next Steps
+![Slack isolation message](screenshots/6_slack_isolated-msg.png)
 
-Add detection coverage for other credential theft tools.
+- LimaCharlie Confirms EndPoint has been isolated
 
-Expand SOAR workflows to include ServiceNow/Jira ticketing.
+![LC console showing Isolated](screenshots/7_lc_isolated.png)
 
-Enrich alerts with MITRE ATT&CK mappings and threat intel.
+## Possible Next Steps
+
+- Add detection coverage for other credential theft tools.
+- Expand SOAR workflows to include ServiceNow/Jira ticketing.
+- Enrich alerts with MITRE ATT&CK mappings and threat intel.
 
 ## 📝 Report
 
-Short narrative summary — written like a mini SOC incident report.
 Example: This lab demonstrated that integrating LimaCharlie with Tines provides effective automated response to credential-dumping activity. Detections flowed seamlessly into SOAR, notifications reached analysts, and automated containment reduced MTTR.
 
 ## 📚 References
