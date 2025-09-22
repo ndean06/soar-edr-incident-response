@@ -72,6 +72,7 @@ It generates an alert if any of the following conditions are met:
 Dection Rule
 ```
 
+![Detection Rule](screenshots/vm_sensor_download_sensor_keys.png)
 
 
 ### Detection Response
@@ -91,7 +92,8 @@ The detection is configured to generate a report with context, tagged under MITR
       - attack.credential_access
   name: MyDFIR - HackTool - Lazagne (SOAR-EDR)
 ```
-📸 [Insert screenshot of detection rule in LimaCharlie console]
+
+![Dtection Resonse](screenshots/vm_sensor_download_sensor_keys.png)
 
 ## ⚡ Tines SOAR Story
 
