@@ -148,7 +148,7 @@ This SOAR story in Tines orchestrates the automated incident response workflow. 
 - This keeps the event open for manual follow-up.
 
 
-## 📸 Demonstration Timeline (Incident Response in Action)
+## Demonstration Timeline (Incident Response in Action)
 
 Step-by-step sequence:
 
@@ -184,7 +184,7 @@ Step-by-step sequence:
 ## Possible Next Steps
 
 - Add detection coverage for other credential theft tools.
-- Expand SOAR workflows to include ServiceNow/Jira ticketing.
+- Expand SOAR workflows to include ticketing.
 - Enrich alerts with MITRE ATT&CK mappings and threat intel.
 
 ## 📝 Report
@@ -193,11 +193,9 @@ Step-by-step sequence:
 
 2. Date of Report: 2025-09-22
 
-3. Reported By ndean
+3. Reported By: ndean
 
-4. Severity Level:
-
-Medium
+4. Severity Level: Medium
 
 5. Summary of Findings:
 
@@ -212,27 +210,19 @@ Time (UTC)	Event Description
 07:10	Analyst approved isolation
 07:11	Tines executed LimaCharlie API call → endpoint quarantined
 07:12	Slack confirmation posted; LimaCharlie console confirmed host isolation
+
 7. Who, What, When, Where, Why, How
 
 Who: SYSTEM on ndean-soar-edr.localdomain
-
 What: Execution of LaZagne credential recovery tool
-
-When: 2025-09-22, approx. 07:03 UTC
-
+When: 2025-09-22 approx. 07:03 UTC
 Where: Windows Server 2016 VM in lab environment
-
 Why: Simulated attacker attempting credential access
-
 How: Direct execution of LaZagne.exe all from the Downloads directory
 
 8. MITRE ATT&CK Techniques:
 
 T1003 – OS Credential Dumping
-
-T1059 – Command and Scripting Interpreter
-
-T1106 – Native API Execution
 
 9. Impact Assessment:
 
@@ -283,7 +273,7 @@ Tines Documentation
 @MyDFIR YouTube Walkthrough
 
 ## 🏁 Conclusion
-Summarize the project’s significance.
+
 
 
 ## 🧩 Skills Demonstrated
