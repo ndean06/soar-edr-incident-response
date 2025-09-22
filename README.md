@@ -116,20 +116,37 @@ The detection is configured to generate a report with context, tagged under MITR
   name: MyDFIR - HackTool - Lazagne (SOAR-EDR)
 ```
 
-![Dtection Resonse](screenshots/response_rule.png)
+![Detection Response](screenshots/response_rule.png)
 
 ## ⚡ Tines SOAR Story
 
-Insert flow diagram.
-Explain major steps:
+![Flow Diagram](screenshots/soar_edr_ir_workflow.png)
 
-1. Webhook receives detection.
-2. Slack + Email notifications.
-3. Analyst prompt for isolation decision.
-4. API call to LimaCharlie if approved.
-📸 [Insert screenshot of Tines flow]
+This SOAR story in Tines orchestrates the automated incident response workflow. It connects LimaCharlie detections to Slack, Email, and automated host isolation.
 
-⚡ Tines SOAR Story
+### Workflow Steps
+
+**1. Webhook Listener (Retrieve Detections)**
+- Tines receives detection alerts from LimaCharlie through a webhook.
+- Each detection contains metadata such as time, computer name, source IP, command line, file path, and sensor ID.
+
+**2. Slack & Email Notifications**
+- Tines formats the detection details and sends them to Slack and Email in real time.
+- This ensures analysts are immediately aware of the suspicious activity.
+
+**3. User Prompt (Decision Point)**
+- Analysts receive a decision form in Tines asking: “Do you want to isolate this machine?”
+- Provides context: host, IP, file path, detection link.
+
+**4a. If Analyst Chooses YES**
+- Tines issues an HTTP Request to the LimaCharlie API to isolate the sensor (endpoint).
+- Another HTTP request retrieves the isolation status.
+- Slack receives a confirmation that the host has been isolated.
+
+**4b. If Analyst Chooses NO**
+- Tines posts a message in Slack: “The computer <hostname> was not isolated, please investigate.”
+- This keeps the event open for manual follow-up.
+
 
 ## 📸 Demonstration Timeline (Incident Response in Action)
 
