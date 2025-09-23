@@ -126,29 +126,42 @@ The detection is configured to generate a report with context, tagged under MITR
 
 This SOAR story in Tines orchestrates the automated incident response workflow. It connects LimaCharlie detections to Slack, Email, and automated host isolation.
 
-### Workflow Steps
+## ⚡ Workflow Steps
 
+| Step | Description |
+|------|-------------|
+| **1. Webhook Listener (Retrieve Detections)** | - Tines receives detection alerts from **LimaCharlie** through a webhook.<br>- Each has metadata: time, computer name, source IP, command line, file path, & sensor ID. |
+| **2. Slack & Email Notifications** | - Tines formats the detection details and sends them to **Slack** and **Email** in real time.<br>- This ensures analysts are immediately aware of the suspicious activity. |
+| **3. User Prompt (Decision Point)** | - Analysts receive a decision form in Tines asking: *“Do you want to isolate this machine?”*<br>- Provides context: host, IP, file path, detection link. |
+| **4a. If Analyst Chooses YES** | - Tines issues an **HTTP Request** to the LimaCharlie API to isolate the sensor (endpoint).<br>- Another HTTP request retrieves the isolation status.<br>- Slack receives a confirmation that the host has been isolated. |
+| **4b. If Analyst Chooses NO** | - Tines posts a message in Slack: *“The computer was not isolated, please investigate.”*<br>- This keeps the event open for manual follow-up. |
+
+
+
+## Workflow Steps
 **1. Webhook Listener (Retrieve Detections)**
 - Tines receives detection alerts from LimaCharlie through a webhook.
 - Each detection contains metadata such as time, computer name, source IP, command line, file path, and sensor ID.
-
+---
 **2. Slack & Email Notifications**
 - Tines formats the detection details and sends them to Slack and Email in real time.
 - This ensures analysts are immediately aware of the suspicious activity.
-
+---
 **3. User Prompt (Decision Point)**
 - Analysts receive a decision form in Tines asking: “Do you want to isolate this machine?”
 - Provides context: host, IP, file path, detection link.
-
+---
 **4a. If Analyst Chooses YES**
 - Tines issues an HTTP Request to the LimaCharlie API to isolate the sensor (endpoint).
 - Another HTTP request retrieves the isolation status.
 - Slack receives a confirmation that the host has been isolated.
+---
 
 **4b. If Analyst Chooses NO**
 - Tines posts a message in Slack: “The computer <hostname> was not isolated, please investigate.”
 - This keeps the event open for manual follow-up.
 
+---
 
 ## Demonstration Timeline (Incident Response in Action)
 
@@ -159,6 +172,8 @@ Step-by-step sequence:
 
 ![LaZagne execution](screenshots/1_lazagne.png)
 
+---
+
 ### 2. Detection Raised (LimaCharlie → Tines)
 - Alert generated and forwarded.
   
@@ -166,13 +181,19 @@ Step-by-step sequence:
 
 ![Email alert](screenshots/3_email_alert.png)
 
+---
+
 ### 3. Analyst is provided a detection link to further investigate
 ![Detection Link](screenshots/4_detection_link.png)
+
+---
  
 ### 4. Analyst Prompted
 - Analyst receives isolation decision form.
 
 ![Tines user prompt](screenshots/5_tines_user_prompt_yes.png)
+
+---
 
 ### 5. Isolation Executed
 - Endpoint quarantined, confirmation posted.
@@ -183,11 +204,15 @@ Step-by-step sequence:
 
 ![LC console showing Isolated](screenshots/7_lc_isolated.png)
 
-## Possible Next Steps
+---
+
+### Possible Next Steps
 - Add detection coverage for other credential theft tools.
 - Expand SOAR workflows to include ticketing.
 - Enrich alerts with MITRE ATT&CK mappings and threat intel.
 
+---
+  
 ## Incident Report
 
 ### Report Details
