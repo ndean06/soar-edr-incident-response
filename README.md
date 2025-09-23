@@ -1,4 +1,4 @@
-# soar-edr-incident-response
+# SOAR EDR Incident Response
 SOAR + EDR lab project using LimaCharlie and Tines to detect password recovery tools, send real-time alerts, and automate host isolation.
 
 
@@ -20,11 +20,13 @@ SOAR EDR Incident Response Project demonstrates how to integrate LimaCharlie (ED
 - LimaCharlie (EDR)
 - Tines (SOAR)
 - Slack & Email integrations
-  
+
+
+## Lab Architecture  
 ![Lab Setup](screenshots/soar_edr_ir_arch.png)
 
 
-## Lab Architecture & Workflow
+## Lab Workflow
 Shows how suspicious activity on the endpoint is detected, forwarded, and responded to:
 
 1. Endpoint (Windows Server VM) → The simulated attacker runs LaZagne, a password recovery tool.
@@ -36,36 +38,52 @@ Shows how suspicious activity on the endpoint is detected, forwarded, and respon
 
 ![Workflow](screenshots/soar_edr_ir_workflow.png)
 
-   
-## Setup & Configuration
+---
+
+### Setup & Configuration
 Deployed Windows Server VM and installed LimaCharlie agent.
+
+---
 
 - Download the appropriate Windows LimaCharlie sensor from the LC console.
 ![Sensor Download](screenshots/LC_sensor_download.png)
 
+---
+
 - Generated an installation key in LimaCharlie.
 ![Installation Keys](screenshots/LC_Installation_keys.png)
 
+---
+
 - Installed the agent on the Windows VM using PowerShell.
 ![Sensor Download & Keys](screenshots/vm_sensor_download_sensor_keys.png) 
+
+---
 
 - Verified the sensor check-in under LimaCharlie → Sensors.
   
   ![Sensor Connection](screenshots/sensor_connect.png) 
 
+---
+
 - Configured Slack + Email integrations in Tines.
 - Built LimaCharlie → Tines webhook connection.
 
-## Detection Rules (LimaCharlie)
-To detect suspicious credential dumping activity, I created a custom detection rule in LimaCharlie targeting the execution of LaZagne.
+---
 
-### Detection Logic
-This rule applies to Windows endpoints and triggers on both `NEW_PROCESS` and `EXISTING_PROCESS` events.
-It generates an alert if any of the following conditions are met:
-- Process file path ends with `lazagne.exe`
-- Command line ends with `all` (a common LaZagne execution flag)
-- Command line contains the keyword lazagne
+### Detection Rules (LimaCharlie)
+To detect suspicious credential dumping activity, I wrote a **custom detection rule in YAML** within LimaCharlie.
+
+
+This rule monitors both **new and existing process events** on Windows endpoints and triggers an alert if any of the following conditions are met:  
+- Process file path ends with **`lazagne.exe`**
+- Command line ends with **`all`** (a common LaZagne execution flag)
+- Command line contains the keyword **`lazagne`**
 - File hash matches a known LaZagne binary
+
+These rules ensure coverage across **multiple indicators of compromise (IOCs)** — filename, command-line arguments, and file hash. This layered approach helps reduced the chance of evasion by attackers.  
+
+---
 
 ### Detection Rule (YAML)
 
@@ -99,6 +117,7 @@ It generates an alert if any of the following conditions are met:
 
 ![Detection Rule](screenshots/detect_rule.png)
 
+---
 
 ### Detection Response
 
@@ -120,13 +139,17 @@ The detection is configured to generate a report with context, tagged under MITR
 
 ![Detection Response](screenshots/response_rule.png)
 
-## ⚡ Tines SOAR Story
+---
 
-![Flow Diagram](screenshots/soar_edr_ir_workflow.png)
+### Tines SOAR Story
 
 This SOAR story in Tines orchestrates the automated incident response workflow. It connects LimaCharlie detections to Slack, Email, and automated host isolation.
 
-## ⚡ Workflow Steps
+![Flow Diagram](screenshots/soar_edr_ir_workflow.png)
+
+---
+
+### Workflow Steps
 
 | Step | Description |
 |------|-------------|
@@ -135,31 +158,6 @@ This SOAR story in Tines orchestrates the automated incident response workflow. 
 | **3. User Prompt (Decision Point)** | - Analysts receive a decision form in Tines asking: *“Do you want to isolate this machine?”*<br>- Provides context: host, IP, file path, detection link. |
 | **4a. If Analyst Chooses YES** | - Tines issues an **HTTP Request** to the LimaCharlie API to isolate the sensor (endpoint).<br>- Another HTTP request retrieves the isolation status.<br>- Slack receives a confirmation that the host has been isolated. |
 | **4b. If Analyst Chooses NO** | - Tines posts a message in Slack: *“The computer was not isolated, please investigate.”*<br>- This keeps the event open for manual follow-up. |
-
-
-
-## Workflow Steps
-**1. Webhook Listener (Retrieve Detections)**
-- Tines receives detection alerts from LimaCharlie through a webhook.
-- Each detection contains metadata such as time, computer name, source IP, command line, file path, and sensor ID.
----
-**2. Slack & Email Notifications**
-- Tines formats the detection details and sends them to Slack and Email in real time.
-- This ensures analysts are immediately aware of the suspicious activity.
----
-**3. User Prompt (Decision Point)**
-- Analysts receive a decision form in Tines asking: “Do you want to isolate this machine?”
-- Provides context: host, IP, file path, detection link.
----
-**4a. If Analyst Chooses YES**
-- Tines issues an HTTP Request to the LimaCharlie API to isolate the sensor (endpoint).
-- Another HTTP request retrieves the isolation status.
-- Slack receives a confirmation that the host has been isolated.
----
-
-**4b. If Analyst Chooses NO**
-- Tines posts a message in Slack: “The computer <hostname> was not isolated, please investigate.”
-- This keeps the event open for manual follow-up.
 
 ---
 
