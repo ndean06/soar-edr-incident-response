@@ -66,8 +66,11 @@ Deployed Windows Server VM and installed LimaCharlie agent.
 
 ---
 
-- Configured Slack + Email integrations in Tines.
-- Built LimaCharlie → Tines webhook connection.
+- Configured Slack and Email integrations in Tines, and built a webhook connection from LimaCharlie to Tines for automated alert forwarding.
+
+![Sensor Download & Keys](screenshots/tines_workflow.png) 
+
+
 
 ---
 
@@ -181,7 +184,10 @@ Step-by-step sequence:
 
 ---
 
-### 3. Analyst is provided a detection link to further investigate
+### 3. Analyst Provided a Detection Link for Investigation  
+- The detection link in LimaCharlie gives analysts full context around the event, including process details, command-line arguments, file hashes, and related activity.  
+- This allows the analyst to expand the scope of the investigation and determine exactly what happened on the endpoint.  
+
 ![Detection Link](screenshots/4_detection_link.png)
 
 ---
@@ -201,13 +207,6 @@ Step-by-step sequence:
 - LimaCharlie Confirms EndPoint has been isolated
 
 ![LC console showing Isolated](screenshots/7_lc_isolated.png)
-
----
-
-### Possible Next Steps
-- Add detection coverage for other credential theft tools.
-- Expand SOAR workflows to include ticketing.
-- Enrich alerts with MITRE ATT&CK mappings and threat intel.
 
 ---
   
