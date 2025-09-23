@@ -292,7 +292,7 @@ A suspicious credential recovery tool (**LaZagne.exe**) was executed on the Wind
 ### Report Status
 **Closed** – Host was isolated, no further malicious activity observed.  
 
-## 📚 References
+## References
 - LimaCharlie Documentation
 - Tines Documentation
 - @MyDFIR YouTube Walkthrough
